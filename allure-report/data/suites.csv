@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","512","GET /api/public/health returns 200","chromium","Mon Oct 20 18:33:47 UTC 2025","passed","Mon Oct 20 18:33:48 UTC 2025","Health check API","api.spec.ts","",""
+"","415","GET /api/public/health returns 200","chromium","Mon Oct 20 18:36:11 UTC 2025","passed","Mon Oct 20 18:36:12 UTC 2025","Health check API","api.spec.ts","",""
