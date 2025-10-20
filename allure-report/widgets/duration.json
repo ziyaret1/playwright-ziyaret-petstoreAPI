@@ -1,1 +1,1 @@
-[{"uid":"2bfc0076a5e14fce","name":"GET /api/public/health returns 200","time":{"start":1760997033093,"stop":1760997033554,"duration":461},"status":"passed","severity":"normal"}]
+[{"uid":"55e413a89cfc3849","name":"GET /api/public/health returns 200","time":{"start":1760997246678,"stop":1760997247239,"duration":561},"status":"passed","severity":"normal"}]
