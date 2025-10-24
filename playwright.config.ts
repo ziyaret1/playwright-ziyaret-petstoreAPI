@@ -12,7 +12,6 @@ export default defineConfig({
   workers: process.env.CI ? 2 : undefined,
   reporter: [["list"], ["allure-playwright"]],
   use: {
-    baseURL: process.env.BASE_API,
     trace: "on-first-retry",
   },
   projects: [
