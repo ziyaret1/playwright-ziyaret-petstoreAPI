@@ -1,5 +1,5 @@
 import { test as base } from "@playwright/test";
-import { UserApi } from "../pages/userManagementPages/userApi";
+import { UserApi } from "../pages/userManagementPages/UserApi";
 import { UserHelpers } from "../helpers/userHelpers";
 
 type ApiServicesFixture = {
