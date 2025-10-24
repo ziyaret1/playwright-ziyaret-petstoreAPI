@@ -22,8 +22,13 @@ jobs:
       - name: Install Chromium only
         run: npx playwright install chromium
 
+      - name: Create .env file
+        run: echo "BASE_API=${{ secrets.BASE_API }}" > .env
+
       - name: Run Playwright Tests with HTML & Allure reporters
         run: npx playwright test --reporter=html,allure-playwright --workers=1
+        env:
+          BASE_API: ${{ secrets.BASE_API }}
         continue-on-error: true
 
       - name: Install Allure CLI
