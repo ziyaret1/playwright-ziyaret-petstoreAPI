@@ -31,9 +31,9 @@ export class UserHelpers {
     };
   }
 
-  public generateUsers(count: number): CreateUserDTO[] {
+  public generateUsers(userCount: number): CreateUserDTO[] {
     const usersList: CreateUserDTO[] = [];
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < userCount; i++) {
       const newUser = this.createUniqueUser();
       usersList.push(newUser);
     }
