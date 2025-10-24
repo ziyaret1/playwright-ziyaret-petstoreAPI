@@ -22,7 +22,7 @@ test.describe("Create User & Login User Suite", () => {
 });
 
 //! CreateWithList & CreateWithArray Users
-test.describe.only("Create User List & Array Suite", () => {
+test.describe("Create User List & Array Suite", () => {
   test("[TRA] Verify that multiple users can be created using createWithList", async ({
     userApi,
     userHelpers,
