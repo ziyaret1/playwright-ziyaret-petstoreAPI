@@ -121,7 +121,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # ✅ Ətraf mühit dəyişənini həm .env faylına, həm də workflow environment-ə yazırıq
+      # ✅ .env faylını yaradıb yoxlayırıq
       - name: Create .env file
         run: |
           echo "BASE_API=${{ secrets.BASE_API }}" > .env
@@ -138,7 +138,7 @@ jobs:
 
       - name: Run Playwright Tests with Allure + HTML reporters
         env:
-          BASE_API: ${{ secrets.BASE_API }}  # 🔥 Burada environment-a ötürülür
+          BASE_API: ${{ secrets.BASE_API }}
         run: |
           echo "🚀 Running Playwright tests with BASE_API=$BASE_API"
           npx playwright test --reporter=html,allure-playwright --workers=1
