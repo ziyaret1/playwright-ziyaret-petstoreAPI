@@ -1,1 +1,1 @@
-{"uid":"b1a8273437954620fa374b796ffaacdd","name":"behaviors","children":[{"name":"GET /api/public/health returns 200","uid":"48dba67c41813dd4","parentUid":"b1a8273437954620fa374b796ffaacdd","status":"passed","time":{"start":1761029876640,"stop":1761029877110,"duration":470},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":["chromium"],"tags":[]}]}
+{"uid":"b1a8273437954620fa374b796ffaacdd","name":"behaviors","children":[]}
