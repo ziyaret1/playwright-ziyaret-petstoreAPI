@@ -119,17 +119,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # BURADA .env faylı yaradırıq
+      # Safely create .env file
       - name: Create .env file
-        run: 
+        run: |
           echo "BASE_API=${{ secrets.BASE_API }}" > .env
+          cat .env  # Debug: ensure it's created correctly
 
       - name: Install Chromium only
         run: npx playwright install chromium
 
       - name: Run Playwright Tests with HTML & Allure reporters
         env:
-          BASE_API: ${{ secrets.BASE_API }}   # Həmçinin environment kimi ötürürük
+          BASE_API: ${{ secrets.BASE_API }}   # Also pass as env variable
         run: npx playwright test --reporter=html,allure-playwright --workers=1
         continue-on-error: true
 
@@ -196,3 +197,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+
