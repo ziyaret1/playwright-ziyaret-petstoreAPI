@@ -1,5 +1,5 @@
 import { APIRequestContext } from "@playwright/test";
-import { BaseAPI } from "../baseAPI";
+import { BaseAPI } from "../BaseAPI";
 import { UserEndpoints } from "../../enums/userEndpoints.enum";
 import { CreateUserDTO } from "../../dto/userManagementDTO/createUser.dto";
 import { ApiResponseDTO } from "../../dto/apiResponse.dto";
