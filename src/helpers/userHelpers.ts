@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
-import { CreateUserDTO } from "../dto/user management dto/createUser.dto";
-import { LoginUserDTO } from "../dto/user management dto/loginUser.dto";
+import { CreateUserDTO } from "../dto/userManagementDTO/createUser.dto";
+import { LoginUserDTO } from "../dto/userManagementDTO/loginUser.dto";
 import { TestUserLogin } from "../testData/testUserDatas";
 
 export class UserHelpers {
