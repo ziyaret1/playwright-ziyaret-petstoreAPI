@@ -5,8 +5,3 @@ export enum UserEndpoints {
   CREATE_WITH_LIST = '/user/createWithList',
   CREATE_WITH_ARRAY = '/user/createWithArray'
 }
-
-
-export enum BaseURLss{
-  BASE_URLL = 'https://petstore.swagger.io/v2'
-}
