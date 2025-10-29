@@ -14,13 +14,8 @@ export class StoreApi extends BaseAPI {
     return this.get<StoreInventoryDTO>(storeEndpoints.GET_INVENTORY_ENDP);
   }
 
-  async getOrderByID(orderID: number): Promise<ApiResponseDTO<StoreOrderDTO>> {
-    return this.get<StoreOrderDTO>(
-      storeEndpoints.GET_ORDER_BYID_ENDP.replace(
-        "{orderID}",
-        orderID.toString()
-      )
-    );
+  async getOrderByID(orderId: number): Promise<ApiResponseDTO<StoreOrderDTO>> {
+    return this.get<StoreOrderDTO>(`${storeEndpoints.GET_ORDER_BYID_ENDP}${orderId}`);;
   }
 
   async placeAnOrder(
@@ -33,11 +28,6 @@ export class StoreApi extends BaseAPI {
   }
 
   async deleteOrderByID(orderId: number): Promise<ApiResponseDTO<null>> {
-    return this.delete(
-      storeEndpoints.DELETE_PURCHASE_ENDP.replace(
-        "{orderId}",
-        orderId.toString()
-      )
-    );
+    return this.delete(`${storeEndpoints.DELETE_PURCHASE_ENDP}${orderId}`); // true
   }
 }

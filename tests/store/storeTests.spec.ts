@@ -22,12 +22,8 @@ test.describe("Returns pet inventories", () => {
   test("[TRA-016] Verify that order details can be retrieved by ID", async ({
     storeApi,
   }) => {
-    try {
-      const response = await storeApi.getOrderByID(createdOrderID);
-      expect(response.status).toBe(200);
-    } catch (error) {
-      console.warn("API returned 404 — Swagger mock data may have been reset.");
-    }
+    const response = await storeApi.getOrderByID(createdOrderID);
+    expect(response.status).toBe(200);
   });
   test("[TRA-017] Verify error response for invalid order ID retrieval", async ({
     storeApi,
