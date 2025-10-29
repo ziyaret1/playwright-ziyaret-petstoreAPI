@@ -14,16 +14,30 @@ export class StoreApi extends BaseAPI {
     return this.get<StoreInventoryDTO>(storeEndpoints.GET_INVENTORY_ENDP);
   }
 
-  async getOrderByID(orderID: number): Promise<ApiResponseDTO<StoreOrderDTO>>{
-    return this.get<StoreOrderDTO>(storeEndpoints.GET_ORDER_BYID_ENDP.replace('{orderID}', orderID.toString()))
+  async getOrderByID(orderID: number): Promise<ApiResponseDTO<StoreOrderDTO>> {
+    return this.get<StoreOrderDTO>(
+      storeEndpoints.GET_ORDER_BYID_ENDP.replace(
+        "{orderID}",
+        orderID.toString()
+      )
+    );
   }
 
-  async placeAnOrder(data: StoreOrderDTO): Promise<ApiResponseDTO<StoreOrderDTO>>{
-    return this.post<StoreOrderDTO, StoreOrderDTO>(storeEndpoints.POST_ORDER_ENDP, data)
-  } 
+  async placeAnOrder(
+    data: StoreOrderDTO
+  ): Promise<ApiResponseDTO<StoreOrderDTO>> {
+    return this.post<StoreOrderDTO, StoreOrderDTO>(
+      storeEndpoints.POST_ORDER_ENDP,
+      data
+    );
+  }
 
-  async deleteOrderByID(orderId: number): Promise<ApiResponseDTO<null>>{
-    return this.delete(storeEndpoints.DELETE_PURCHASE_ENDP.replace('{orderId}', orderId.toString()))
+  async deleteOrderByID(orderId: number): Promise<ApiResponseDTO<null>> {
+    return this.delete(
+      storeEndpoints.DELETE_PURCHASE_ENDP.replace(
+        "{orderId}",
+        orderId.toString()
+      )
+    );
   }
 }
-

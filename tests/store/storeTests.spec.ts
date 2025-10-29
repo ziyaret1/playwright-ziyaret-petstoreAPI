@@ -10,14 +10,12 @@ test.describe("Returns pet inventories", () => {
     const response = await storeApi.placeAnOrder(
       StoreHelpers.placeUniqueOrder()
     );
-    console.log("Place Order Response:", response.body);
     createdOrderID = response.body?.id!;
   });
   test("[TRA-014] Verify that inventory can be fetched successfully", async ({
     storeApi,
   }) => {
     const response = await storeApi.getInventory();
-    console.log(response);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("available");
   });
@@ -27,7 +25,6 @@ test.describe("Returns pet inventories", () => {
     try {
       const response = await storeApi.getOrderByID(createdOrderID);
       expect(response.status).toBe(200);
-      console.log(response, "createdorder");
     } catch (error) {
       console.warn("API returned 404 — Swagger mock data may have been reset.");
     }
@@ -73,7 +70,6 @@ test.describe("Delete purchase order", () => {
     const response = await storeApi.placeAnOrder(
       StoreHelpers.placeUniqueOrder()
     );
-    console.log("Place Order Response:", response.body);
     createdOrderID = response.body?.id!;
   });
   test("[TRA-018] Verify that an order can be deleted successfully", async ({
@@ -86,12 +82,12 @@ test.describe("Delete purchase order", () => {
     storeApi,
   }) => {
     const response = await storeApi.deleteOrderByID(-9999);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(400);
   });
   test("[TRA-022] Verify deleting an already deleted order returns appropriate error", async ({
     storeApi,
   }) => {
     const response = await storeApi.deleteOrderByID(2);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(404);
   });
 });

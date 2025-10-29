@@ -10,11 +10,4 @@ export const InvalidOrderData = {
     quantity: "three",
     complete: "yes",
   },
-  negativeDatas: {
-    id: -1,
-    petId: -10,
-    quantity: -5,
-    status: "placed",
-    complete: false,
-  },
 };
