@@ -9,10 +9,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -22,8 +25,10 @@ jobs:
       - name: Install Chromium only
         run: npx playwright install chromium
 
-      - name: Run Playwright Tests with HTML & Allure reporters
+      - name: Run Playwright Tests (HTML + Allure)
         run: npx playwright test --reporter=html,allure-playwright --workers=1
+        env:
+          BASE_API: ${{ secrets.BASE_API }}
         continue-on-error: true
 
       - name: Install Allure CLI
@@ -52,6 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - name: Download Allure Report Artifact
         uses: actions/download-artifact@v4
@@ -76,7 +82,7 @@ jobs:
           echo 'a { display: inline-block; padding: 20px 40px; border-radius: 12px; background: #1e3c72; color: #fff; text-decoration: none; font-size: 18px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }' >> ./site/index.html
           echo 'a:hover { background: #2a5298; transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.6); }' >> ./site/index.html
           echo '</style>' >> ./site/index.html
-          echo '</head><body>' >> ./site/index.html 
+          echo '</head><body>' >> ./site/index.html
           echo '<h1>📊 Test Reports</h1>' >> ./site/index.html
           echo '<ul>' >> ./site/index.html
           echo '<li><a href="allure-report/index.html">🚀 Allure Report</a></li>' >> ./site/index.html
@@ -89,6 +95,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
-
-
-

@@ -19,7 +19,7 @@ export class BaseAPI {
       headers: response.headers(), // give header from response
       body: (await response.json()) as TRes, // read body as json, is being object
     };
-  }
+  } 
 
   protected async post<TReq, TRes>(
     endpoint: string,

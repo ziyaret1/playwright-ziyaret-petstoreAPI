@@ -1,9 +1,9 @@
 import { APIRequestContext } from "@playwright/test";
-import { BaseAPI } from "../BaseAPI";
 import { ApiResponseDTO } from "../../dto/apiResponse.dto";
 import { StoreInventoryDTO } from "../../dto/storeDTO/storeInventory.dto";
 import { storeEndpoints } from "../../enums/storeEndpoints.enum";
 import { StoreOrderDTO } from "../../dto/storeDTO/storeOrder.dto";
+import { BaseAPI } from "../baseApii";
 
 export class StoreApi extends BaseAPI {
   constructor(request: APIRequestContext, baseUrl: string) {

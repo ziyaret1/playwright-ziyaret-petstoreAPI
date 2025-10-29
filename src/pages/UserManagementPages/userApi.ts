@@ -1,10 +1,10 @@
 import { APIRequestContext } from "@playwright/test";
-import { BaseAPI } from "../BaseAPI";
 import { UserEndpoints } from "../../enums/userEndpoints.enum";
 import { CreateUserDTO } from "../../dto/userManagementDTO/createUser.dto";
 import { ApiResponseDTO } from "../../dto/apiResponse.dto";
 import { UserResponseDTO } from "../../dto/userManagementDTO/userResponse.dto";
 import { LoginUserDTO } from "../../dto/userManagementDTO/loginUser.dto";
+import { BaseAPI } from "../baseApii";
 
 export class UserApi extends BaseAPI {
   constructor(request: APIRequestContext, baseUrl: string) {

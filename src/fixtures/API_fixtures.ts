@@ -1,7 +1,7 @@
 import { test as base } from "@playwright/test";
 import { UserApi } from "../pages/UserManagementPages/userApi";
-import { UserHelpers } from "../helpers/userHelpers";
 import { StoreApi } from "../pages/Store/storeApi";
+import { UserHelpers } from "../helpers/userHelpers";
 
 type ApiServicesFixture = {
   userApi: UserApi;
@@ -11,7 +11,8 @@ type ApiServicesFixture = {
 
 export const test = base.extend<ApiServicesFixture>({
   userApi: async ({ request }, use) => {
-    const baseUrl: string | undefined = process.env.BASE_API;
+    const baseUrl: string =
+      process.env.BASE_API || "https://petstore.swagger.io/v2";
     const userApi = new UserApi(request, baseUrl!);
     await use(userApi);
   },
@@ -22,7 +23,8 @@ export const test = base.extend<ApiServicesFixture>({
   },
 
   storeApi: async ({ request }, use) => {
-    const baseUrl: string | undefined = process.env.BASE_API;
+    const baseUrl: string =
+      process.env.BASE_API || "https://petstore.swagger.io/v2";
     const storeApi = new StoreApi(request, baseUrl!);
     await use(storeApi);
   },
