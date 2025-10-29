@@ -10,12 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  // reporter: [["list"], ["allure-playwright"]],
-  reporter: [
-  ["list"],
-  ["allure-playwright"],
-  ["html", { outputFolder: "playwright-report", open: "never" }]
-],
+  reporter: [["list"], ["allure-playwright"]],
   use: {
     trace: "on-first-retry",
   },
