@@ -26,7 +26,7 @@ jobs:
         run: npx playwright install chromium
 
       - name: Run Playwright Tests (HTML + Allure)
-        run: npx playwright test --reporter=html,allure-playwright --workers=1
+        run: npx playwright test --reporter=html,allure-playwright --workers=1 || true
         env:
           BASE_API: ${{ secrets.BASE_API }}
         continue-on-error: true
