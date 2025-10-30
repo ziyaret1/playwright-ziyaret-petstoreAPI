@@ -1,7 +1,6 @@
-import { CreateUserDTO } from "./createUser.dto";
-
+import { CreateUserDTO } from './createUser.dto';
 export interface UserResponseDTO extends CreateUserDTO {
-  code?: number;
-  type?: string;
-  message?: string;
+    code?: number;
+    type?: string;
+    message?: string;
 }

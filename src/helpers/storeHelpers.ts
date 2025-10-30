@@ -1,5 +1,4 @@
-import { StoreOrderDTO } from "../dto/storeDTO/storeOrder.dto";
-
+import { StoreOrderDTO } from '../dto/storeDTO/storeOrder.dto';
 export class StoreHelpers {
     public static placeUniqueOrder(): StoreOrderDTO {
         const uniqueId = Date.now();
@@ -9,7 +8,7 @@ export class StoreHelpers {
             petId: uniquePetId,
             quantity: 5,
             shipDate: new Date().toISOString(),
-            status: "placed",
+            status: 'placed',
             complete: true,
         };
     }
