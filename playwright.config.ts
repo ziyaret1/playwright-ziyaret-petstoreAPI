@@ -2,9 +2,12 @@ import { defineConfig, devices } from '@playwright/test';
 // Imporst for .env
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
-    testDir: './tests',
+    testDir: path.join(__dirname, 'tests'),
     testMatch: '**/*.spec.ts',
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
