@@ -3,11 +3,11 @@ import { ApiResponseDTO } from '../dto/apiResponse.dto';
 export class BaseAPI {
     constructor(
         protected request: APIRequestContext,
-        protected baseUrl: string
+        protected baseUrl: string,
     ) {}
     protected async get<TRes>(
         endpoint: string,
-        headers?: Record<string, string>
+        headers?: Record<string, string>,
     ): Promise<ApiResponseDTO<TRes>> {
         const response = await this.request.get(`${this.baseUrl}${endpoint}`, {
             headers,
@@ -21,7 +21,7 @@ export class BaseAPI {
     protected async post<TReq, TRes>(
         endpoint: string,
         data?: TReq,
-        headers?: Record<string, string>
+        headers?: Record<string, string>,
     ): Promise<ApiResponseDTO<TRes>> {
         const response = await this.request.post(`${this.baseUrl}${endpoint}`, {
             data,
@@ -36,7 +36,7 @@ export class BaseAPI {
     protected async put<TReq, TRes>(
         endpoint: string,
         data?: TReq,
-        headers?: Record<string, string>
+        headers?: Record<string, string>,
     ): Promise<ApiResponseDTO<TRes>> {
         const response = await this.request.put(`${this.baseUrl}${endpoint}`, {
             data,
@@ -51,7 +51,7 @@ export class BaseAPI {
     protected async patch<TReq, TRes>(
         endpoint: string,
         data?: TReq,
-        headers?: Record<string, string>
+        headers?: Record<string, string>,
     ): Promise<ApiResponseDTO<TRes>> {
         const response = await this.request.patch(`${this.baseUrl}${endpoint}`, {
             data,
@@ -65,7 +65,7 @@ export class BaseAPI {
     }
     protected async delete<TRes>(
         endpoint: string,
-        headers?: Record<string, string>
+        headers?: Record<string, string>,
     ): Promise<ApiResponseDTO<TRes>> {
         const response = await this.request.delete(`${this.baseUrl}${endpoint}`, {
             headers,

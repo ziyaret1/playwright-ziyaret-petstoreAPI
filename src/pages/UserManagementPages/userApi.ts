@@ -15,7 +15,7 @@ export class UserApi extends BaseAPI {
     async createWithListAndArray(data: CreateUserDTO[]): Promise<ApiResponseDTO<UserResponseDTO>> {
         return await this.post<CreateUserDTO[], UserResponseDTO>(
             UserEndpoints.CREATE_WITH_LIST,
-            data
+            data,
         );
     }
     async loginUser(data: LoginUserDTO): Promise<ApiResponseDTO<UserResponseDTO>> {
@@ -28,7 +28,7 @@ export class UserApi extends BaseAPI {
     }
     async updateUser(
         username: string,
-        data: CreateUserDTO
+        data: CreateUserDTO,
     ): Promise<ApiResponseDTO<UserResponseDTO>> {
         const endpoint = UserEndpoints.USERNAME_ENDP.replace('{username}', username);
         return this.put<CreateUserDTO, UserResponseDTO>(endpoint, data);

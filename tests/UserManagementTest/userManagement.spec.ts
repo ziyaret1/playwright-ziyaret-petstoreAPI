@@ -86,7 +86,7 @@ test.describe('Update User Suite', () => {
     test('[TRA-010] Update non-existing user', async ({ userApi }) => {
         const response = await userApi.updateUser(
             NonExistingUserData.username,
-            NonExistingUserData
+            NonExistingUserData,
         );
         expect(response.status).toBe(404);
     });
