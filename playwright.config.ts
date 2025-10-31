@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-// Imporst for .env
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,7 +12,11 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
-    reporter: [['list'], ['allure-playwright']],
+    reporter: [
+        ['list'],
+        ['allure-playwright'],
+        ['junit', { outputFile: 'test-results/junit-results.xml', includeTestOutput: true }],
+    ],
     use: {
         trace: 'on-first-retry',
     },
