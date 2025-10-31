@@ -13,7 +13,11 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
-    reporter: [['list'], ['allure-playwright']],
+     reporter: [
+    ['list'], // terminalda sadə nəticə
+    ['allure-playwright'], // Allure HTML report
+    ['junit', { outputFile: 'results/junit-results.xml' }] // QA Sphere üçün XML
+  ],
     use: {
         trace: 'on-first-retry',
     },
