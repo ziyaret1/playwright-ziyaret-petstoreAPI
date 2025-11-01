@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-// Imporst for .env
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -16,7 +15,7 @@ export default defineConfig({
      reporter: [
     ['list'], // terminalda sadə nəticə
     ['allure-playwright'], // Allure HTML report
-    ['junit', { outputFile: 'results/junit-results.xml' }] // QA Sphere üçün XML
+    ['junit', { outputFile: 'test-results/junit-results.xml' }] // QA Sphere üçün XML
   ],
     use: {
         trace: 'on-first-retry',
