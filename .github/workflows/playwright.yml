@@ -72,7 +72,7 @@ jobs:
               run: |
                 npm install -g qas-cli
                 qasphere junit-upload \
-                  --run-name "QA Sphere new run: ${GITHUB_RUN_NUMBER}" \
+                  --run-name "Automated test run - {MMM} {DD}, {YYYY}, {hh}:{mm}:{ss} {AMPM}" \
                   --verbose \
                   test-results/junit-results.xml
               env:
