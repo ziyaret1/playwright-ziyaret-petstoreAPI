@@ -1,8 +1,6 @@
 name: Playwright CI/CD Workflow
 
 on:
-    push:
-        branches: ['**']
     pull_request:
         branches: [main]
 
@@ -28,7 +26,6 @@ jobs:
     test:
         name: Playwright Tests
         runs-on: ubuntu-latest
-        needs: lint
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
@@ -44,8 +41,8 @@ jobs:
             - name: Install Chromium only
               run: npx playwright install chromium
 
-            - name: Run Playwright Tests (HTML + Allure)
-              run: npx playwright test --reporter=html,allure-playwright --workers=1 || true
+            - name: Run Playwright Tests (HTML + Allure + JUnit)
+              run: npx playwright test --workers=1 --output=playwright-report || true
               env:
                   BASE_API: ${{ secrets.BASE_API }}
 
@@ -69,7 +66,19 @@ jobs:
               with:
                   name: allure-report
                   path: allure-report/**
-
+            
+            - name: Upload JUnit Results to QA Sphere
+              if: always()
+              run: |
+                npm install -g qas-cli
+                qasphere junit-upload \
+                  --run-name "Automated test run - {MMM} {DD}, {YYYY}, {hh}:{mm}:{ss} {AMPM}" \
+                  --verbose \
+                  test-results/junit-results.xml
+              env:
+                QAS_URL: ${{ secrets. QAS_URL }}
+                QAS_TOKEN: ${{ secrets.QAS_TOKEN }}
+              
     deploy:
         name: Deploy Reports
         runs-on: ubuntu-latest
@@ -109,6 +118,7 @@ jobs:
                   echo '<ul>' >> ./site/index.html
                   echo '<li><a href="allure-report/index.html">🚀 Allure Report</a></li>' >> ./site/index.html
                   echo '<li><a href="playwright-report/index.html">🎭 Playwright HTML Report</a></li>' >> ./site/index.html
+                  echo '<li><a href="https://nocompany-536.eu1.qasphere.com/project/TRA/run" target="_blank">🧪 QA Sphere Run Dashboard</a></li>' >> ./site/index.html
                   echo '</ul>' >> ./site/index.html
                   echo '</body></html>' >> ./site/index.html
 
@@ -117,3 +127,5 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./site
+                  keep_files: true
+                  allow_empty_commit: true
