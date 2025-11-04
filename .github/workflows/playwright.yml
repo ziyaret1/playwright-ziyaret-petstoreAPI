@@ -76,7 +76,7 @@ jobs:
                   --verbose \
                   test-results/junit-results.xml
               env:
-                QAS_URL: https://nocompany-536.eu1.qasphere.com
+                QAS_URL: ${{ secrets. QAS_URL }}
                 QAS_TOKEN: ${{ secrets.QAS_TOKEN }}
               
     deploy:
@@ -118,6 +118,7 @@ jobs:
                   echo '<ul>' >> ./site/index.html
                   echo '<li><a href="allure-report/index.html">🚀 Allure Report</a></li>' >> ./site/index.html
                   echo '<li><a href="playwright-report/index.html">🎭 Playwright HTML Report</a></li>' >> ./site/index.html
+                  echo '<li><a href="https://nocompany-536.eu1.qasphere.com/project/TRA/run" target="_blank">🧪 QA Sphere Run Dashboard</a></li>' >> ./site/index.html
                   echo '</ul>' >> ./site/index.html
                   echo '</body></html>' >> ./site/index.html
 
