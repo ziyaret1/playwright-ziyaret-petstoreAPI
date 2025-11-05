@@ -4,8 +4,8 @@ on:
     pull_request:
         branches: [main]
     schedule:
-      - cron: '20 8 * * *'  # Runs daily at 02:00 AM 
-
+      - cron: '35 8 * * *'  # Runs daily at ___ AM 
+    workflow_dispatch:
 jobs:
     lint:
         name: ESLint Check
