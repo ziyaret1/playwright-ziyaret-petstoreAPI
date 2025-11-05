@@ -2,9 +2,9 @@ name: Playwright CI/CD Workflow
 
 on:
     pull_request:
-        branches: [main]
+        branches: [main, ziyaret/newrules]
     schedule:
-      - cron: '50 8 * * *'  # Runs daily at ___ AM 
+      - cron: '55 8 * * *'  # Runs daily at ___ AM 
     workflow_dispatch:
 jobs:
     lint:
