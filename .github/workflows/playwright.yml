@@ -5,7 +5,7 @@ on:
     pull_request:
         branches: [main, ziyaret/newrules]
     schedule:
-      - cron: '02 10 * * *'  # Runs daily at ___ AM 
+      - cron: '10 10 * * *'  # Runs daily at ___ AM 
 jobs:
     lint:
         name: ESLint Check
@@ -85,7 +85,7 @@ jobs:
     daily-regression:
         name: Daily Regression Tests
         runs-on: ubuntu-latest
-        # if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule'
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
