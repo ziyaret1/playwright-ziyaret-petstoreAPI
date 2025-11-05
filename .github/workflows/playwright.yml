@@ -132,7 +132,7 @@ jobs:
               run: |
                 npm install -g qas-cli
                 qasphere junit-upload \
-                  --run-name "Daily Regression - {MMM} {DD}, {YYYY}, {hh}:{mm}:{ss} {AMPM}" \
+                  --run-name "Daily Regression Test Run - {MMM} {DD}, {YYYY}, {hh}:{mm}:{ss} {AMPM}" \
                   --verbose \
                   test-results/junit-results.xml
               env:
