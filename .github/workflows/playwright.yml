@@ -2,12 +2,10 @@ name: Playwright CI/CD Workflow
 
 on:
     
-    # pull_request:
-    #     branches: [main]
-    push:
-        branches: [ziyaret/newrules]
+    pull_request:
+        branches: [main, ziyaret/newrules]
     schedule:
-      - cron: '03 9 * * *'  # Runs daily at ___ AM 
+      - cron: '10 9 * * *'  # Runs daily at ___ AM 
 jobs:
     lint:
         name: ESLint Check
