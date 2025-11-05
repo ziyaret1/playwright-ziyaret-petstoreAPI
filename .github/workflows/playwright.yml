@@ -3,7 +3,8 @@ name: Playwright CI/CD Workflow
 on:
     pull_request:
         branches: [main]
-
+    schedule:
+      - cron: '0 2 * * *'
 jobs:
     lint:
         name: ESLint Check
@@ -107,7 +108,7 @@ jobs:
                   echo '<!DOCTYPE html>' > ./site/index.html
                   echo '<html><head><meta charset="UTF-8"><title>Test Reports</title>' >> ./site/index.html
                   echo '<style>' >> ./site/index.html
-                  echo 'body { font-family: "Segoe UI", Tahoma, sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff; text-align: center; padding: 50px; }' >> ./site/index.html
+                  echo 'body { font-fam\ily: "Segoe UI", Tahoma, sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff; text-align: center; padding: 50px; }' >> ./site/index.html
                   echo 'h1 { font-size: 2.5rem; margin-bottom: 40px; }' >> ./site/index.html
                   echo 'ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 30px; }' >> ./site/index.html
                   echo 'a { display: inline-block; padding: 20px 40px; border-radius: 12px; background: #1e3c72; color: #fff; text-decoration: none; font-size: 18px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }' >> ./site/index.html
