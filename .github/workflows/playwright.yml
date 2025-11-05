@@ -5,7 +5,7 @@ on:
     pull_request:
         branches: [main, ziyaret/newrules]
     schedule:
-      - cron: '55 9 * * *'  # Runs daily at ___ AM 
+      - cron: '02 10 * * *'  # Runs daily at ___ AM 
 jobs:
     lint:
         name: ESLint Check
@@ -28,7 +28,7 @@ jobs:
     test:
         name: Playwright Tests (PR)
         runs-on: ubuntu-latest
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'pull_request'
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
