@@ -4,7 +4,7 @@ on:
     pull_request:
         branches: [main]
     schedule:
-      - cron: '35 8 * * *'  # Runs daily at ___ AM 
+      - cron: '50 8 * * *'  # Runs daily at ___ AM 
     workflow_dispatch:
 jobs:
     lint:
