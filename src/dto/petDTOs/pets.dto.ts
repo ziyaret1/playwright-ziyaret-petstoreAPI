@@ -1,6 +1,5 @@
-import { PetCategoryDTO } from "./petCategory.dto";
-import { PetTagDTO } from "./petTag.dto";
-
+import { PetCategoryDTO } from './petCategory.dto';
+import { PetTagDTO } from './petTag.dto';
 export interface PetDTO {
     id?: number;
     category?: PetCategoryDTO;

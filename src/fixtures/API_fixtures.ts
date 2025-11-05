@@ -24,9 +24,9 @@ export const test = base.extend<ApiServicesFixture>({
         const storeApi = new StoreApi(request, baseUrl!);
         await use(storeApi);
     },
-    petsApi: async({request}, use) =>{
+    petsApi: async ({ request }, use) => {
         const baseUrl: string = process.env.BASE_API || 'https://petstore.swagger.io/v2';
         const petsApi = new PetsApi(request, baseUrl);
-        await use(petsApi)
-    }
+        await use(petsApi);
+    },
 });
