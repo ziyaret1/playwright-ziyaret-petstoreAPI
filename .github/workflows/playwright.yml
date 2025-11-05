@@ -1,8 +1,8 @@
 name: Playwright CI/CD Workflow
 
 on:
-    # pull_request:
-    #     branches: [main, ziyaret/newrules]
+    pull_request:
+        branches: [main, ziyaret/newrules]
     schedule:
       - cron: '10 10 * * *'  # Runs daily at ___ AM 
     workflow_dispatch:
