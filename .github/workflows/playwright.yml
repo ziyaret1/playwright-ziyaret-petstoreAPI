@@ -3,7 +3,9 @@ name: Playwright CI/CD Workflow
 on:
     pull_request:
         branches: [main]
-
+    schedule:
+      - cron: '0 5 * * *'  # Runs daily at 9 AM Baku time, 5:00 AM UTC
+    workflow_dispatch:
 jobs:
     lint:
         name: ESLint Check
@@ -24,8 +26,9 @@ jobs:
               run: npx eslint . --ext .ts,.tsx
 
     test:
-        name: Playwright Tests
+        name: Playwright Tests (PR)
         runs-on: ubuntu-latest
+        if: github.event_name == 'pull_request'
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
@@ -57,14 +60,14 @@ jobs:
               if: always()
               uses: actions/upload-artifact@v4
               with:
-                  name: playwright-html-report
+                  name: playwright-html-report-pr
                   path: playwright-report/**
 
             - name: Upload Allure Report as Artifact
               if: always()
               uses: actions/upload-artifact@v4
               with:
-                  name: allure-report
+                  name: allure-report-pr
                   path: allure-report/**
             
             - name: Upload JUnit Results to QA Sphere
@@ -72,33 +75,107 @@ jobs:
               run: |
                 npm install -g qas-cli
                 qasphere junit-upload \
-                  --run-name "Automated test run - {MMM} {DD}, {YYYY}, {hh}:{mm}:{ss} {AMPM}" \
+                  --run-name "PR Test Run - {MMM} {DD}, {YYYY}, {hh}:{mm}:{ss} {AMPM}" \
                   --verbose \
                   test-results/junit-results.xml
               env:
-                QAS_URL: ${{ secrets. QAS_URL }}
+                QAS_URL: ${{ secrets.QAS_URL }}
+                QAS_TOKEN: ${{ secrets.QAS_TOKEN }}
+
+    daily-regression:
+        name: Daily Regression Tests
+        runs-on: ubuntu-latest
+        if: github.event_name == 'schedule'
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Install Chromium only
+              run: npx playwright install chromium
+
+            - name: Run Playwright Tests (HTML + Allure + JUnit)
+              run: npx playwright test --workers=1 --output=playwright-report || true
+              env:
+                  BASE_API: ${{ secrets.BASE_API }}
+
+            - name: Install Allure CLI
+              run: npm install -g allure-commandline --save-dev
+
+            - name: Generate Allure Report
+              if: always()
+              run: allure generate ./allure-results --clean -o ./allure-report
+
+            - name: Upload Playwright HTML Report as Artifact
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-html-report-daily
+                  path: playwright-report/**
+
+            - name: Upload Allure Report as Artifact
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: allure-report-daily
+                  path: allure-report/**
+            
+            - name: Upload JUnit Results to QA Sphere
+              if: always()
+              run: |
+                npm install -g qas-cli
+                qasphere junit-upload \
+                  --run-name "Daily Regression Test Run - {MMM} {DD}, {YYYY}, {hh}:{mm}:{ss} {AMPM}" \
+                  --verbose \
+                  test-results/junit-results.xml
+              env:
+                QAS_URL: ${{ secrets.QAS_URL }}
                 QAS_TOKEN: ${{ secrets.QAS_TOKEN }}
               
     deploy:
         name: Deploy Reports
         runs-on: ubuntu-latest
-        needs: test
+        needs: [test, daily-regression]
+        if: always()
         permissions:
             contents: write
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Download Allure Report Artifact
+            - name: Download PR Allure Report (if exists)
+              continue-on-error: true
               uses: actions/download-artifact@v4
               with:
-                  name: allure-report
+                  name: allure-report-pr
                   path: ./site/allure-report
 
-            - name: Download Playwright HTML Report Artifact
+            - name: Download PR Playwright Report (if exists)
+              continue-on-error: true
               uses: actions/download-artifact@v4
               with:
-                  name: playwright-html-report
+                  name: playwright-html-report-pr
+                  path: ./site/playwright-report
+
+            - name: Download Daily Allure Report (if exists)
+              continue-on-error: true
+              uses: actions/download-artifact@v4
+              with:
+                  name: allure-report-daily
+                  path: ./site/allure-report
+
+            - name: Download Daily Playwright Report (if exists)
+              continue-on-error: true
+              uses: actions/download-artifact@v4
+              with:
+                  name: playwright-html-report-daily
                   path: ./site/playwright-report
 
             - name: Create index.html for reports
