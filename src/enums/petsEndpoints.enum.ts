@@ -5,5 +5,5 @@ export const petsEndpoints = {
     POST_UPDATE_PET: '/pet',
     DELETE_PET_BY_ID: '/pet/',
     GET_PET_BY_STATUS: '/pet/findByStatus',
-    POST_UPLOAD_IMAGE: '/pet/{petId}/uploadImage',
+    POST_UPLOAD_IMAGE: '/pet',
 };

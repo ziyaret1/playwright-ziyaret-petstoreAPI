@@ -1,7 +1,7 @@
 import { PetCategoryDTO } from './petCategory.dto';
 import { PetTagDTO } from './petTag.dto';
 export interface PetDTO {
-    id?: number;
+    id: number;
     category?: PetCategoryDTO;
     name: string;
     photoUrls: string[];
