@@ -24,16 +24,16 @@ export class ConsultationSection {
         const titles = await this.activeSlide.locator('.NewsItem-module--title--b4ebe').allInnerTexts();
         return titles
     }
-    async scrollNext() {
+    async scrollNext(): Promise<void> {
         await this.nextButton.click();
     }
-    async scrollPrev() {
+    async scrollPrev(): Promise<void> {
         await this.prevButton.click();
     }
-    async clickDiscussBtn() {
+    async clickDiscussBtn(): Promise<void> {
         await this.discussProjectBtn.click()
     }
-    async closeModal(){
+    async closeModal(): Promise<void>{
         await this.closeButton.click()
     }
 }

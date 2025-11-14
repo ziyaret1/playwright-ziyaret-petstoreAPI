@@ -34,7 +34,7 @@ test.describe('About Us / Map', () => {
     })
 })
 
-test.describe.only("Testimonials Section", () => {
+test.describe("Testimonials Section", () => {
     test.beforeEach(async ({ homePage }) => {
         await homePage.openPage()
     })
@@ -56,4 +56,3 @@ test.describe.only("Testimonials Section", () => {
         expect(isRightVisible).toBeTruthy();
     });
 });
-

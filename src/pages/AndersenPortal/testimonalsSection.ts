@@ -34,31 +34,31 @@ export class TestimonalsSection {
         await expect(this.activeName).not.toHaveText(currentName!);
     }
 
-    async getActiveTestimonialName() {
+    async getActiveTestimonialName(): Promise<string | null> {
         const activePanel = this.page.locator('#testimonials section[role="tabpanel"]:not([hidden])');
         return await activePanel.locator('[class*="PersonalData-module--name"]').first().textContent();
     }
 
-    async isTestimonialVisible() {
+    async isTestimonialVisible(): Promise<boolean> {
         await this.testimonialSection.scrollIntoViewIfNeeded();
         await expect(this.reviewCards.first()).toBeVisible({ timeout: 10000 });
         return true;
     }
 
-    async clickScrollRight() {
+    async clickScrollRight(): Promise<void> {
         await this.scrollRightButton.scrollIntoViewIfNeeded();
         await this.scrollRightButton.waitFor({ state: "visible", timeout: 10000 });
         await this.scrollRightButton.click();
     }
 
-    async clickScrollLeftIfVisible() {
+    async clickScrollLeftIfVisible(): Promise<void> {
         if (await this.scrollLeftButton.isVisible()) {
             await this.scrollLeftButton.scrollIntoViewIfNeeded();
             await this.scrollLeftButton.click();
         }
     }
 
-    async isScrollButtonVisible(direction: "left" | "right") {
+    async isScrollButtonVisible(direction: "left" | "right"): Promise<boolean> {
         const button = direction === "left" ? this.scrollLeftButton : this.scrollRightButton;
         await button.waitFor({ state: "visible", timeout: 10000 });
         return await button.isVisible();

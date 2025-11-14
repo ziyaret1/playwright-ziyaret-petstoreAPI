@@ -23,10 +23,10 @@ export class AboutUsSection {
         this.mapIFrame = page.locator('iframe[src*="google.com/maps"]');
     }
 
-    async clickConsultationBtn() {
+    async clickConsultationBtn(): Promise<void> {
         await this.consultationBtn.click()
     }
-    async clickCloseModalBtn() {
+    async clickCloseModalBtn(): Promise<void> {
         await this.closeModalBtn.click();
     }
 }
