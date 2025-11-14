@@ -50,13 +50,8 @@ test.describe.only("Testimonials Section", () => {
     });
 
     test("Scroll buttons work to change tabs", async ({ homePage }) => {
-        // Scroll Right butonunun görünmesini bekle ve tıkla
         await homePage.testimonials.clickScrollRight();
-
-        // Scroll Left butonunun görünmesini kontrol et ve tıkla
         await homePage.testimonials.clickScrollLeftIfVisible();
-
-        // Scroll Right butonunun tekrar görünmesini kontrol et
         const isRightVisible = await homePage.testimonials.isScrollButtonVisible("right");
         expect(isRightVisible).toBeTruthy();
     });
