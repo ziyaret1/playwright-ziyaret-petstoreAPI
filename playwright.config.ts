@@ -19,6 +19,11 @@ export default defineConfig({
     ],
     use: {
         trace: 'on-first-retry',
+        baseURL: 'https://andersenlab.com/',
+        headless: false,
+        launchOptions: {
+            slowMo: 1000, // 5000 ms = 5 second break
+        },
     },
     projects: [
         {
